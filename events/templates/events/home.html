@@ -41,6 +41,18 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+
+       body {
+         background-image: url( "{% static 'bg.jpg' %}" );
+         background-size: cover;
+       }  
+
+      .navbar {
+        background-color: #070251;
+        border: 2px solid #E98A46;
+      }
+
+
       }
     </style>
     <!-- Custom styles for this template -->
@@ -59,7 +71,7 @@
               <a class="nav-link" href="{% static 'AboutMe.txt' %}">About Me</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://konivjab.net/category/%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D1%96-%D0%BF%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%B8/" >Ukrainian jokes</a>
+              <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://korysniporady.com.ua/ukra%D1%97nski-prikoli-28/" >Ukrainian jokes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'showblog' %}">Blog</a>

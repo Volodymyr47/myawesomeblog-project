@@ -35,55 +35,95 @@
         -ms-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
+      body {
+         background-image: url( "{% static 'bg.jpg' %}" );
+         background-size: cover;
+      }
+
+      .card-img-top {
+          /*max-height: 100px;*/
+          width: 320px;
+          height: 200px;
+      }
+
+      .card {
+        max-width: 320px;
+        max-height: 320px;
+        background-color: #f4e5bc;
+      }
+
+      .navbar {
+        background-color: #070251;
+        border: 2px solid #E98A46;
+    }
+
+      #post_title {
+        font-size: 150%;
+        margin: 2%;
+      }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
-  </head>
-  <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light font-italic" style="background-color: #F3C19D; border: 2px solid #E98A46">
-        <a class="navbar-brand" href="{% url 'home' %}">My awesome Blog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li>
-              <a class="nav-link" href="{% static 'AboutMe.txt' %}">About Me</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://konivjab.net/category/">Ukrainian jokes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Blog</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-  </header>
+      </head>
+      <body>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand text-warning" href="{% url 'home' %}"><strong><sup><em><ins>my</ins></em></sup>SIMPLE</strong><sup><em><ins>BLOG</ins></em></sup></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li>
+                  <a class="nav-link text-warning" href="{% static 'AboutMe.txt' %}">About Me</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-warning" target="_blank" rel="noopener noreferrer" href="https://korysniporady.com.ua/ukra%D1%97nski-prikoli-28/">Ukrainian jokes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active text-warning" href="#">Blog</a>
+                </li>              
+                <li class="nav-item"><a class="nav-link text-warning" href="{% url 'login' %}">Login</a></li>
+              </ul>
+            </div>
+          </nav>
+      </header>
 
-<main role="main">
+    <main role="main">
 
-	<h1 class="pt-3 pl-3">Recent posts</h1>
+    <h1 align="center">Welcome to my posts</h1>
 
-	{% for post in posts.all %}
-		<div class="col-md-3 pt-3 pl-4">
-            <div class="card mb-4 shadow-sm">
-                  <a href="{% url 'specific_post' post.id %}"><h2 class="card-text pb-2 display-6">{{ post.title }}</h2></a>
+  <!--<div id="leftcol"> 
+  <h3>Navigation panel</h3>
+  <ul>
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third item</li>
+    <li>Fourth item</li>
+  </ul>
+-->
+<div class="container">
+    <div class="row">   
+	      {% for post in posts.all %}
+		      <div class="col-md-4 pt-3 pl-4">
+            <div class="card mb-4 shadow-sm"  style="margin-left: 10px">
+                  <a href="{% url 'specific_post' post.id %}"><h2 class="card-text pb-2" id="post_title">{{ post.title }}</h2></a>
                   <a href="{% url 'specific_post' post.id %}"><img class="card-img-top" src="{{ post.image.url }}"/></a>
                   <p class="card-text">{{ post.get_summary }}</p>
                   <p class="card-text">{{ post.date }}</p>                 
                 <div class="card-body">  
                 </div>
             </div>
-        </div>
-     {% endfor %}
+          </div>
+        {% endfor %}  
+    </div>  
+</div>     
 </main>
 
 <footer class="text-muted">

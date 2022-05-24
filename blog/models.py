@@ -10,7 +10,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='blog_images/')
 
     def get_summary(self):
-        return self.text[:120]
+        return self.text[:40]
 
 
     def __str__(self):
