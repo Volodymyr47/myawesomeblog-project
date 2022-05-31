@@ -4,12 +4,28 @@
 {% block content %}
 
 <main role="main">
-
 	<div class="md-3">
-	<h1>{{ post.title }}</h1>
-	<img src="{{ post.image.url }}" height="400">
-	<p class="card-text pb-2 display-6">{{ post.text }}</p>
+		<h1>{{ post.title }}</h1>
+		<img src="{{ post.image.url }}" height="400">
+		<p class="card-text pb-2 display-6">{{ post.text }}</p>
+		<div class="col-md-4 pt-3 pl-4">
 
-</div>
+				{% if user.is_authenticated %}
+					<textarea placeholder="Comment..."></textarea>
+					<br><br>
+					<input class="btn btn-success" type="submit" value="Add comment">
+				{% else %}
+					<textarea placeholder="Comment..." disabled="True"></textarea>
+					<br><br>
+					<input class="btn btn-success" type="submit" value="Add comment" disabled="True">
+				{% endif %}
+				<br><br>
+				{% for comment in comments.all %}
+					<p><sub>Created {{ comment.comment_date }} by user</sub></p>
+					<p>{{ comment.comment|linebreaks }}</p>
+				{% endfor %}
+		</div>
+
+	</div>
 </main>
 {% endblock %}

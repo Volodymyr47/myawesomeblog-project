@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import SignUpForms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -15,10 +15,13 @@ def register(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('home'))
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'registration/register.html', context)
 
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('showblog'))
 
 
 # def login(request):

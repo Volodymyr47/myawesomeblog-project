@@ -85,12 +85,22 @@
         <li class="nav-item">
           <a class="nav-link active text-warning" href="{% url 'showblog' %}">Blog</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-warning" href="{% url 'login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-warning" href="{% url 'register' %}">Registration</a>
-        </li>
+        {% if user.is_authenticated == False %}
+          <li class="nav-item">
+              <a class="nav-link text-warning" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-warning" href="{% url 'register' %}">Registration</a>
+          </li>
+        {% else %}
+          <li style="color: white; font-weight: bold;">
+            <p> Hello, {{ user.username }} </p>
+          </li>
+          <li>
+            <a class="nav-link text-warning" href="{% url 'logout_view' %}">Logout</a>
+          </li>
+        {% endif %}
+
       </ul>
     </div>
   </nav>
