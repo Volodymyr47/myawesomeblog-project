@@ -1,0 +1,9 @@
+{% extends 'events/base.html' %}
+{% load static %}
+{% block title %}My Events{% endblock %}
+{% block content %}
+    <div>
+        <h1> Thank you for your comment. </h1>
+        <a href="{% url 'showblog' %}" >Go to the post lists</a>
+    </div>
+{% endblock %}

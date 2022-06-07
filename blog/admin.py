@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Post, PostComment
+from .models import Post #PostComment
 from .models import User
+from .forms import PostComment
+
 
 # Register your models here.
 

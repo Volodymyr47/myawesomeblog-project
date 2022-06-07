@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, PostComment
+from .models import Post
 from .forms import CommentForm
-from django.contrib.auth.models import User
+from .forms import PostComment
+# from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 
-
-
-
-# Create your views here.
 
 def showblog(request):
     posts = Post.objects
@@ -16,20 +15,37 @@ def showblog(request):
 def specific_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = PostComment.objects.filter(post=post_id).order_by('-comment_date')
-    return render(request,'blog/specific_post.html', {'post': post, 'comments': comments})
+    return render(request, 'blog/specific_post.html', {'post': post, 'comments': comments})
 
 
-def add_comment_to_post(request):
-    post_id = Post.id
-    user_id = User.id
+def comentadd(request):
+    return render(request, 'blog/comment.html')
+
+
+def success(request):
+    return render(request, 'blog/success.html')
+
+
+def add_comment_to_post(request, post_id):
+    # if post_id and user_id:
     if request.method == 'POST':
-        try:
-            # comment_post = CommentForm(data=request.POST)
-            comment_post = PostComment(post=post_id, user=user_id,comment=CommentForm.fields.comment, active=False)
-            if comment_post.is_valid():
-                comment_post.save()
-        except Exception as e:
-            raise(f'Error exception with insert data to PostComment: {e.__str__()}')
-            print(f'Error exception with insert data to PostComment: {e.__str__()}')
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.cleaned_data['comment']
+            # form.save(commit=False)
+            post = post_id
+            user = request.user.id
+            form.save()
+            # comentadd(request, post_id)
+            # return HttpResponseRedirect('comentadd')
+            return render(request, 'blog/success.html')
+            # return super().form_valid(form)
+        else:
+            return HttpResponse(status=400, content=str(form.errors))
     else:
-        return CommentForm()
+        return HttpResponseRedirect(reverse('showblog'))
+    # else:
+    #     return HttpResponse(status=400, content=str(user_id)+' '+str(post_id))
+
+
+

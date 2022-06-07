@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'account',
     'blog',
     'events',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/awesome_media/'
 
 LOGIN_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATES_PACK = 'bootstrap4'
