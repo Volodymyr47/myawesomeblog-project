@@ -65,6 +65,11 @@
         margin: 2%;
       }
 
+      .hello {
+        background: #BA8B1F;
+        color: #070251;
+      }
+
     </style>
     <!-- Custom styles for this template -->
 <!--    <link href="album.css" rel="stylesheet">-->
@@ -75,15 +80,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li>
-          <a class="nav-link text-warning" href="{% static 'AboutMe.txt' %}">AboutMe</a>
+      <ul class="navbar-nav ml-auto font-weight-bold form-inline">
+        <li class="nav-item">
+          <a class="nav-link active text-warning text-center" href="{% url 'showblog' %}">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-warning" target="_blank" rel="noopener noreferrer" href="https://korysniporady.com.ua/ukra%D1%97nski-prikoli-28/">Ukrainian jokes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active text-warning" href="{% url 'showblog' %}">Blog</a>
+        <li>
+          <a class="nav-link text-warning" href="{% static 'AboutMe.txt' %}">About Me</a>
         </li>
         {% if user.is_authenticated == False %}
           <li class="nav-item">
@@ -94,7 +99,7 @@
           </li>
         {% else %}
           <li style="color: white; font-weight: bold;">
-            <p> Hello, {{ user.username }} </p>
+            <div class="hello"> Hello, {{ user.username }} </div>
           </li>
           <li>
             <a class="nav-link text-warning" href="{% url 'logout_view' %}">Logout</a>

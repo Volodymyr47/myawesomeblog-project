@@ -2,10 +2,17 @@
 {% load static %}
 {% block title %}My Events{% endblock %}
 {% block content %}
-
+<style>
+  .line {
+    border: 5px double #BA8B00;
+    background: #070251;
+    color: red;
+    height: 20px;
+   }
+</style>
 <main role="main">
 
-  <section class="jumbotron text-center">
+  <section class="jumbotron text-center" style="background: None">
     <div class="container">
       <!-- <h1>Album example</h1> -->
       <p class="lead text-muted">Hey there! I'm excited to see you here. You can write me right now!</p>
@@ -13,32 +20,30 @@
         <a href="mailto:xiloroh171@roxoas.com" class="btn btn-primary my-2" style="align: center">Send mail</a>
         <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
       </p>
-
         <img src="{% static 'pexels.jpeg' %}" height="300" width="300" class="img-fluid">
-
     </div>
   </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row">
-
-          {% for event in events.all %}
-
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img class="card-img-top" src="{{ event.event_image.url }}"/>
-                  <div class="card-body">
-                    <p class="card-text">{{ event.event_text }}</p>
+  <div class="line"></div>
+  <div class="album py-5">
+     <div class="text-center text-secondary">
+         <h2><strong>Our funny events</strong></h2>
+     </div>
+        <div class="container">
+          <div class="row">
+              {% for event in events.all %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#">
+                        <img class="card-img-top" src="{{ event.event_image.url }}"/>
+                         <div class="card-body">
+                            <p class="card-text">{{ event.get_title }}</p>
+                         </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-          {% endfor %}
-
-      </div>
-    </div>
+              {% endfor %}
+          </div>
+        </div>
   </div>
 
 </main>

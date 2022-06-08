@@ -1,11 +1,11 @@
-from django.core.exceptions import ValidationError
 from .models import PostComment
-from django.forms import ModelForm
+from django import forms
 
 
-class CommentForm(ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = PostComment
-        fields = ['comment', ]
+        fields = ['comment',]
+
 
 

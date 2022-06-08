@@ -19,10 +19,13 @@
 	      {% for post in posts.all %}
                <div class="col-md-4 pt-3 pl-4">
                     <div class="card mb-4 shadow-sm"  style="margin-left: 10px">
-                          <a href="{% url 'specific_post' post.id %}"><h2 class="card-text pb-2" id="post_title">{{ post.title }}</h2></a>
-                          <a href="{% url 'specific_post' post.id %}"><img class="card-img-top" src="{{ post.image.url }}"/></a>
+                          <a href="{% url 'specific_post' post.id %}">
+                              <h2 class="card-text pb-2" id="post_title">{{ post.title }}</h2>
+                              <img class="card-img-top" src="{{ post.image.url }}"/>
+                          </a>
                           <p class="card-text">{{ post.get_summary }}</p>
                           <p class="card-text">{{ post.date }}</p>
+
                         <div class="card-body">
                         </div>
                     </div>

@@ -20,7 +20,7 @@ class PostComment(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     comment = models.TextField(max_length=3000, blank=False)
     comment_date = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField()
+    active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.comment[:15]+'...'
+        return self.comment[:15]

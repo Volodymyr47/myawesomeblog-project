@@ -1,3 +1,5 @@
+import this
+
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from .forms import CommentForm
@@ -18,34 +20,29 @@ def specific_post(request, post_id):
     return render(request, 'blog/specific_post.html', {'post': post, 'comments': comments})
 
 
-def comentadd(request):
-    return render(request, 'blog/comment.html')
-
-
-def success(request):
-    return render(request, 'blog/success.html')
-
 
 def add_comment_to_post(request, post_id):
-    # if post_id and user_id:
+    try:
+        post = Post.objects.get(pk=post_id)
+    except Post.DoesNotExist:
+        return HttpResponse(status=404, content="404: Post does not exist")
     if request.method == 'POST':
         form = CommentForm(request.POST)
+        print(request.user.id, post_id)
         if form.is_valid():
             comment = form.cleaned_data['comment']
             # form.save(commit=False)
-            post = post_id
-            user = request.user.id
-            form.save()
-            # comentadd(request, post_id)
-            # return HttpResponseRedirect('comentadd')
-            return render(request, 'blog/success.html')
-            # return super().form_valid(form)
+            # post = post_id
+            # user = request.user.id
+            db_comment = PostComment(user=request.user, post=post, comment=comment)
+            db_comment.save()
+            # form.save()
+            return render(request, 'blog/comment.html')
         else:
-            return HttpResponse(status=400, content=str(form.errors))
+            return HttpResponse(status=400, content=str(form.errors) + ' -> ' + str(form.is_valid()))
     else:
         return HttpResponseRedirect(reverse('showblog'))
-    # else:
-    #     return HttpResponse(status=400, content=str(user_id)+' '+str(post_id))
+
 
 
 
