@@ -17,7 +17,7 @@
       <!-- <h1>Album example</h1> -->
       <p class="lead text-muted">Hey there! I'm excited to see you here. You can write me right now!</p>
       <p>
-        <a href="mailto:xiloroh171@roxoas.com" class="btn btn-primary my-2" style="align: center">Send mail</a>
+        <a href="mailto:xiloroh171@roxoas.com" class="btn btn-light my-2" style="align: center">Send mail</a>
         <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
       </p>
         <img src="{% static 'pexels.jpeg' %}" height="300" width="300" class="img-fluid">
@@ -25,16 +25,27 @@
   </section>
   <div class="line"></div>
   <div class="album py-5">
-     <div class="text-center text-secondary">
+     <div class="text-center text-secondary mb-5">
          <h2><strong>Our funny events</strong></h2>
+         {% if user.is_authenticated %}
+             <div>
+                 <a href="{% url 'new_event_add' %}">
+                    <button class="btn btn-success btn-lg">Add new event</button>
+                 </a>
+             </div>
+         {% endif %}
      </div>
         <div class="container">
           <div class="row">
               {% for event in events.all %}
                   <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                      <a href="#">
-                        <img class="card-img-top" src="{{ event.event_image.url }}"/>
+                      <a href="{% url 'specific_event' event.id %}" style="color: #BA8B00;">
+                        {% if event.event_image %}
+                            <div >
+                                <img class="card-img-top" src="{{ event.event_image.url }}"/>
+                            </div>
+                        {% endif %}
                          <div class="card-body">
                             <p class="card-text">{{ event.get_title }}</p>
                          </div>
@@ -48,23 +59,5 @@
 
 </main>
 
-<!--<footer class="text-muted">-->
-<!--  <div class="container">-->
-<!--    <p class="float-right">-->
-<!--      <a href="#" type="button "class="btn btn-warning" style="background-color: #E98A46; color: #fff">Back to top</a>-->
-<!--    </p>-->
-<!--    <p class="text-md-left">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>-->
-<!--    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.5/getting-started/introduction/">getting started guide</a>.</p>-->
-<!--  </div>-->
-<!--</footer>-->
 
-
-
-
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-<!--  </body>-->
-
-<!--</html>-->
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends 'events/base.html' %}
 {% load static %}
-{% block title %}My Events{% endblock %}
+
+{% block title %}
+	{{ post_title }}
+{% endblock %}
+
 {% block content %}
 
 <main role="main">
@@ -8,7 +12,10 @@
 		<h1>{{ post.title }}</h1>
 		<img src="{{ post.image.url }}" height="400">
 		<p class="card-text pb-2 display-6">{{ post.text }}</p>
-		<div class="col-md-4 pt-3 pl-4">
+		<div class="text-dark pl-4">
+			<h4>Post Comments</h4>
+		</div>
+		<div class="col-md-5 pt-1 pl-4">
 			{% if user.is_authenticated %}
 				<form method="post" action="{% url 'add_comment_to_post' post.id %}">
 					{% csrf_token %}
@@ -18,19 +25,20 @@
         				{{ error }}
 					{% endfor %}
 					<br><br>
-
 					<input class="btn btn-success" type="submit" value="Add comment">
 				</form>
-			{% else %}
-				<textarea disabled="True"></textarea>
-				<br><br>
-				<input class="btn btn-success" type="submit" value="Add comment" disabled="True">
 			{% endif %}
 			<br><br>
-			{% for comment in comments.all %}
-				<p><sub>Created {{ comment.comment_date|date:"d.m.Y h:m" }} by user {{ user }}</sub></p>
-				<p>{{ comment.comment|linebreaks }}</p>
-			{% endfor %}
+			<div class="comments mb-5">
+				{% for comment in comments.all %}
+					<div class="card-header">
+					   <sub>Created {{ comment.comment_date|date:"d.m.Y h:m" }} by user {{ user }}</sub>
+					</div>
+					<div class="card-body" style="background: #ffffa0">
+					   {{ comment.comment|linebreaks }}
+					</div>
+				{% endfor %}
+        	</div>
 		</div>
 	</div>
 </main>

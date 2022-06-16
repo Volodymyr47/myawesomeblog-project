@@ -1,1 +1,59 @@
-<h1>Specific event</h1>
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ event.title }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1>{{ event.title }}</h1>
+            </div>
+            {% if event.event_image %}
+                <img class="img-fluid" src="{{ event.event_image.url }}" alt="{{ event.title }}" height="600" width="800" />
+            {% endif %}
+            <div>
+                <br>
+                {{event.event_text}}
+                <br><br>
+            </div>
+
+            <div>
+                {% if event.updating_date %}
+                    <p><em>Updating {{event.updating_date}} by {{event.user}}</em></p>
+                {% else %}
+                    <p>Creating {{event.creation_date}} by {{event.user}}</p>
+                {% endif %}
+            </div>
+
+            <div class="mt-5">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'add_comment_to_event' event.id %}">
+                        {% csrf_token %}
+                        {{ form.user.as_hidden }}
+                        <textarea name="comment" placeholder="Enter your comment..." style="width: 600px; height: 100px"></textarea>
+                        {% for error in formset.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                        <br><br>
+                        <input class="btn btn-success" type="submit" value="Add comment">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="comments mb-5">
+            {% for comment in event_comments.all %}
+                <div class="card-header">
+                   <sub>Created {{ comment.comment_date|date:"d.m.Y h:m" }} by {{ user }}</sub>
+                </div>
+                <div class="card-body" style="background: #ffffa0">
+                   {{ comment.comment|linebreaks }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

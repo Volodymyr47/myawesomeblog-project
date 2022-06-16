@@ -82,7 +82,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto font-weight-bold form-inline">
         <li class="nav-item">
-          <a class="nav-link active text-warning text-center" href="{% url 'showblog' %}">Blog</a>
+          <a class="nav-link active text-warning text-center" href="{% url 'home' %}">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-warning text-center" href="{% url 'showblog' %}">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-warning" target="_blank" rel="noopener noreferrer" href="https://korysniporady.com.ua/ukra%D1%97nski-prikoli-28/">Ukrainian jokes</a>
@@ -139,16 +142,24 @@
 	  	</div> 
 	</div>  	-->
 
-  <footer class="text-muted">
-  <div class="container">
-    <p class="float-right">
-      <a href="#" type="button "class="btn btn-warning" style="background-color: #E98A46; color: #fff">Back to top</a>
-    </p>
-    <p class="text-md-left">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.5/getting-started/introduction/">getting started guide</a>.</p>
-  </div>
-</footer>
+<!--  <footer class="text-muted">-->
+<!--  <div class="container">-->
+<!--    <p class="float-right">-->
+<!--      <a href="#" type="button "class="btn btn-warning" style="background-color: #E98A46; color: #fff">Back to top</a>-->
+<!--    </p>-->
+<!--    <p class="text-md-left"></p>-->
+<!--    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.5/getting-started/introduction/">getting started guide</a>.</p>-->
+<!--  </div>-->
+<!--</footer>-->
 
+  <footer class="text-center text-lg-start" style="background: #070251; border: 2px solid #E98A46;">
+  <!-- Copyright -->
+  <div class="text-center p-3 text-warning">
+    © 2022 Copyright:
+    <a class="text-warning" href="http://127.0.0.1:8000/">MySimpleBlog</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
 
   </body>

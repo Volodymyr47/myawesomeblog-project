@@ -139,3 +139,5 @@ MEDIA_URL = '/awesome_media/'
 LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATES_PACK = 'bootstrap4'
+
+LOGIN_URL = '/registration/login/'
